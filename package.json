@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-with-typescript",
+  "name": "no-gfx-ecommerce",
   "version": "5.0.0",
   "private": true,
   "scripts": {
@@ -15,12 +15,14 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
+    "axios": "^0.26.1",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-query": "^3.34.16"
   },
   "devDependencies": {
+    "@cld-apis/types": "^0.1.6",
     "@types/node": "latest",
     "@types/react": "latest",
     "eslint": "latest",
