@@ -8,7 +8,7 @@ import getGraphicsCards from '../src/api/getGraphicCards'
 import GraphicsCard from '../src/components/GraphicsCard'
 import { IGraphicsCard } from '../types/GraphicsCard'
 import Layout from '../src/components/Layout'
-import Sidebar from '../src/components/Sidebar'
+import Sidebar from '../src/components/SidebarComponents/Sidebar'
 import { Box } from '@mui/system'
 
 const Home: NextPage = ({
