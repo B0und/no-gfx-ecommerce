@@ -1,10 +1,12 @@
-const fetchGraphicsCards = async () => {
+import { IGraphicsResponse } from '../../types/GraphicsCard'
+
+const getGraphicsCards = async (): Promise<IGraphicsResponse> => {
   const res = await fetch(
     'https://gfx-backend.herokuapp.com/api/products?populate=*'
   )
   return res.json()
 }
-export default fetchGraphicsCards
+export default getGraphicsCards
 
 // http://localhost:1337/api/graphics-cards?filters[developer][$eq]=nvidia
 
