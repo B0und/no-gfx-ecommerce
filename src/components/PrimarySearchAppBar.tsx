@@ -171,7 +171,7 @@ export default function PrimarySearchAppBar() {
     <ElevationScroll>
       <AppBar position="sticky" sx={{ bgcolor: 'white', color: 'black' }}>
         <Box sx={{ flexGrow: 1 }}>
-          <Toolbar>
+          <Toolbar disableGutters>
             <IconButton
               size="large"
               edge="start"
