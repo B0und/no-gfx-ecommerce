@@ -1,10 +1,9 @@
 import { IGraphicsResponse } from '../../types/GraphicsCard'
+import axiosConfig from './axiosConfig'
 
 const getGraphicsCards = async (): Promise<IGraphicsResponse> => {
-  const res = await fetch(
-    'https://gfx-backend.herokuapp.com/api/products?populate=*'
-  )
-  return res.json()
+  const res = await axiosConfig.get('/products?populate=*')
+  return res.data
 }
 export default getGraphicsCards
 

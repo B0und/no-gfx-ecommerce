@@ -106,7 +106,7 @@ const Price = () => {
             onChange={handleStartPriceChange}
             onBlur={handleStartPriceBlur}
             startAdornment={
-              <InputAdornment position="start">от</InputAdornment>
+              <InputAdornment position="start">from</InputAdornment>
             }
           />
         </FormControl>
@@ -118,7 +118,7 @@ const Price = () => {
             onChange={handleEndPriceChange}
             onBlur={handleEndPriceBlur}
             startAdornment={
-              <InputAdornment position="start">до</InputAdornment>
+              <InputAdornment position="start">to</InputAdornment>
             }
           />
         </FormControl>
