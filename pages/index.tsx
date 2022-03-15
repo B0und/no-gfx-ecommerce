@@ -12,12 +12,24 @@ import Sidebar from '../src/components/SidebarComponents/Sidebar'
 import { Box } from '@mui/system'
 import getPrices from '../src/api/getPrices'
 import { createContext } from 'react'
+import getDevelopers from '../src/api/getDevelopers'
+import getManufacturers from '../src/api/getManufacturers'
+import getVideoChipsets from '../src/api/getVideoChipsets'
+import getVRAMs from '../src/api/getVRAMs'
+import getMemoryTypes from '../src/api/getMemoryTypes'
+import getBusWidths from '../src/api/getBusWidths'
 
 export const PricesContext = createContext([])
 
 const Home: NextPage = ({
   graphicsCards,
   prices,
+  developers,
+  manufacturers,
+  videochipsets,
+  vrams,
+  memoryTypes,
+  busWidths,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { isLoading, isError, data, error } = useQuery(
     'graphics-cards',
@@ -45,8 +57,16 @@ const Home: NextPage = ({
         }}
       >
         <PricesContext.Provider value={prices}>
-          <Sidebar />
+          <Sidebar
+            developers={developers}
+            manufacturers={manufacturers}
+            videochipsets={videochipsets}
+            vrams={vrams}
+            memoryTypes={memoryTypes}
+            busWidths={busWidths}
+          />
         </PricesContext.Provider>
+
         <Box
           sx={{
             my: 4,
@@ -67,15 +87,36 @@ const Home: NextPage = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const [graphicsCards, prices] = await Promise.all([
+  const [
+    graphicsCards,
+    prices,
+    developers,
+    manufacturers,
+    videochipsets,
+    vrams,
+    memoryTypes,
+    busWidths
+  ] = await Promise.all([
     getGraphicsCards(),
     getPrices(),
+    getDevelopers(),
+    getManufacturers(),
+    getVideoChipsets(),
+    getVRAMs(),
+    getMemoryTypes(),
+    getBusWidths(),
   ])
 
   return {
     props: {
       graphicsCards,
       prices,
+      developers,
+      manufacturers,
+      videochipsets,
+      vrams,
+      memoryTypes,
+      busWidths,
     },
   }
 }
