@@ -93,7 +93,6 @@ const Price = () => {
         <FormControl variant="standard">
           <OutlinedInput
             size="small"
-            id="standard-adornment-amount"
             value={startPrice}
             onChange={handleStartPriceChange}
             onBlur={handleStartPriceBlur}
@@ -105,7 +104,6 @@ const Price = () => {
         <FormControl variant="standard">
           <OutlinedInput
             size="small"
-            id="standard-adornment-amount"
             value={endPrice}
             onChange={handleEndPriceChange}
             onBlur={handleEndPriceBlur}
