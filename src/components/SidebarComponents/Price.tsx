@@ -6,31 +6,23 @@ import {
   Slider,
   Typography,
 } from '@mui/material'
-import React from 'react'
+import React, { useContext } from 'react'
+import { useQuery } from 'react-query'
+import { PricesContext } from '../../../pages'
+import getPrices from '../../api/getPrices'
+import { mapOneRangeToAnother } from '../../helpers/helpers'
 
 function getPriceText(value: number) {
   return `${value} rubles`
 }
 
-function mapOneRangeToAnother(
-  sourceNumber: number,
-  fromA: number,
-  fromB: number,
-  toA: number,
-  toB: number
-) {
-  const deltaA = fromB - fromA
-  const deltaB = toB - toA
-  const scale = deltaB / deltaA
-  const negA = -1 * fromA
-  const offset = negA * scale + toA
-  const finalNumber = sourceNumber * scale + offset
-  return Math.round(finalNumber)
-}
-
 const Price = () => {
-  const startP = 1000
-  const endP = 500000
+  const prices = useContext(PricesContext)
+  const { data } = useQuery('prices', getPrices, {
+    initialData: prices,
+  })
+  const startP = Math.min(...(data ?? [0]))
+  const endP = Math.max(...(data ?? [1000000]))
   const [startPrice, setStartPrice] = React.useState(startP)
   const [endPrice, setEndPrice] = React.useState(endP)
 

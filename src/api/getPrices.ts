@@ -1,8 +1,8 @@
-import { IGraphicsResponse } from '../../types/GraphicsCard'
 import axiosConfig from './axiosConfig'
 
-const getPrices = async (): Promise<IGraphicsResponse> => {
+const getPrices = async (): Promise<number[]> => {
   const res = await axiosConfig.get('/products?fields[0]=price')
-  return res.data
+  const prices = res.data.data.map((item: Record<string, unknown>) => item.price)
+  return prices
 }
 export default getPrices

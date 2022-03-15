@@ -10,9 +10,14 @@ import { IGraphicsCard } from '../types/GraphicsCard'
 import Layout from '../src/components/Layout'
 import Sidebar from '../src/components/SidebarComponents/Sidebar'
 import { Box } from '@mui/system'
+import getPrices from '../src/api/getPrices'
+import { createContext } from 'react'
+
+export const PricesContext = createContext([])
 
 const Home: NextPage = ({
   graphicsCards,
+  prices,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { isLoading, isError, data, error } = useQuery(
     'graphics-cards',
@@ -39,7 +44,9 @@ const Home: NextPage = ({
           alignItems: 'flex-start',
         }}
       >
-        <Sidebar />
+        <PricesContext.Provider value={prices}>
+          <Sidebar />
+        </PricesContext.Provider>
         <Box
           sx={{
             my: 4,
@@ -60,11 +67,15 @@ const Home: NextPage = ({
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const graphicsCards = await getGraphicsCards()
+  const [graphicsCards, prices] = await Promise.all([
+    getGraphicsCards(),
+    getPrices(),
+  ])
 
   return {
     props: {
       graphicsCards,
+      prices,
     },
   }
 }

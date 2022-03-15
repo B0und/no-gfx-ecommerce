@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material'
+import CheckboxList from './CheckboxList'
 import Price from './Price'
 
 const Sidebar = () => {
@@ -21,6 +22,7 @@ const Sidebar = () => {
         Filters
       </Typography>
       <Price />
+      <CheckboxList />
     </Box>
   )
 }
