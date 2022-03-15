@@ -10,7 +10,7 @@ import React, { useContext } from 'react'
 import { useQuery } from 'react-query'
 import { PricesContext } from '../../../pages'
 import getPrices from '../../api/getPrices'
-import { mapOneRangeToAnother } from '../../helpers/helpers'
+import { mapOneRangeToAnother } from '../../utils/utils'
 
 function getPriceText(value: number) {
   return `${value} rubles`
