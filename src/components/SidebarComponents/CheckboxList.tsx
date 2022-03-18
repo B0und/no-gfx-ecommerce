@@ -20,10 +20,8 @@ const CheckboxList: React.FC<ICheckboxList> = (props) => {
   )
   const initialData = data.slice(0, 4)
   const extraData = data.slice(4, data.length)
-
   const showMore = !show && extraData.length !== 0
 
-  console.log(extraData.isEmpty)
 
   const handleShow = () => {
     setShow(!show)

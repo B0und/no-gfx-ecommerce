@@ -18,6 +18,8 @@ import getVideoChipsets from '../src/api/getVideoChipsets'
 import getVRAMs from '../src/api/getVRAMs'
 import getMemoryTypes from '../src/api/getMemoryTypes'
 import getBusWidths from '../src/api/getBusWidths'
+import { Grid } from '@mui/material'
+import SortHeader from '../src/components/SortHeader'
 
 export const PricesContext = createContext([])
 
@@ -54,6 +56,7 @@ const Home: NextPage = ({
           flexDirection: 'row',
           justifyContent: 'flex-start',
           alignItems: 'flex-start',
+          gap: '16px',
         }}
       >
         <PricesContext.Provider value={prices}>
@@ -67,19 +70,15 @@ const Home: NextPage = ({
           />
         </PricesContext.Provider>
 
-        <Box
-          sx={{
-            my: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexGrow: '1',
-          }}
-        >
-          {data?.data?.map((videoCard: IGraphicsCard) => (
-            <GraphicsCard key={videoCard.id} videoCard={videoCard} />
-          ))}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <SortHeader />
+          <Grid container spacing={2}>
+            {data?.data?.map((videoCard: IGraphicsCard) => (
+              <Grid item width="100%" key={videoCard.id}>
+                <GraphicsCard videoCard={videoCard} />
+              </Grid>
+            ))}
+          </Grid>
         </Box>
       </Box>
     </Layout>
@@ -95,7 +94,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     videochipsets,
     vrams,
     memoryTypes,
-    busWidths
+    busWidths,
   ] = await Promise.all([
     getGraphicsCards(),
     getPrices(),

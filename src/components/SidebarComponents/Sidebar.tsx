@@ -21,7 +21,7 @@ const Sidebar = (props: ISidebarProps) => {
   return (
     <Box
       sx={{
-        width: '300px',
+        minWidth: '280px',
         background: '#eaeaea',
 
         p: '16px',
