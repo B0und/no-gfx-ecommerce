@@ -5,9 +5,11 @@ const capitalize = (str: string) =>
 
 const getDevelopers = async (): Promise<string[]> => {
   const res = await axiosConfig.get('/developers?fields[0]=name')
-  const developers = res.data.data.map((item: Record<string, string>) =>
-    capitalize(item.name)
-  )
+  const developers = res.data.data.map((item: Record<string, string>) => [
+    capitalize(item.name),
+    item.id,
+  ])
+
   return developers
 }
 export default getDevelopers

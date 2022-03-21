@@ -1,9 +1,4 @@
-import {
-  FormControl,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from '@mui/material'
+import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material'
 import React from 'react'
 
 const typesList = ['popular', 'cheapFirst', 'expensiveFirst', 'discount']

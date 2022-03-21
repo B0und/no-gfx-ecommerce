@@ -7,7 +7,7 @@ const getGraphicsCards = async (): Promise<IGraphicsResponse> => {
 }
 export default getGraphicsCards
 
-// http://localhost:1337/api/graphics-cards?filters[developer][$eq]=nvidia
+// http://localhost:1337/api/products?populate=*&filters[developer][name][$eq]=amd
 
 // http://localhost:1337/api/developers?fields[0]=name
 
