@@ -1,6 +1,8 @@
 import { Box, Checkbox, FormControlLabel, FormGroup } from '@mui/material'
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
+import filtersStore from '../../store/filters.store'
+import { parseCategoryString } from '../../utils/utils'
 
 interface ICheckboxList {
   title: string
@@ -14,6 +16,16 @@ const CheckboxList: React.FC<ICheckboxList> = (props) => {
   const [isChecked, setIsChecked] = React.useState<boolean[]>(
     props.initialData.slice().fill(false)
   )
+
+  const itemState = props.initialData.map((item: [string, boolean]) => ({
+    name: item[0],
+    value: false,
+  }))
+
+  filtersStore.addFilter(parseCategoryString(props.title), itemState)
+
+  const qString = filtersStore.queryString
+  console.log(qString)
 
   const { data } = useQuery(
     props.title.toLocaleLowerCase(),
@@ -31,6 +43,9 @@ const CheckboxList: React.FC<ICheckboxList> = (props) => {
     setIsChecked(
       isChecked.map((v: boolean, i: number) => (i === index ? !v : v))
     )
+
+    const parsedTitle = parseCategoryString(props.title)
+    filtersStore.toggleCheckbox(parsedTitle, index)
   }
 
   const handleShow = () => {

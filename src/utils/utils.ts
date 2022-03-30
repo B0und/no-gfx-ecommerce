@@ -13,3 +13,7 @@ export function mapOneRangeToAnother(
   const finalNumber = sourceNumber * scale + offset
   return Math.round(finalNumber)
 }
+
+export function parseCategoryString(text: string) {
+  return text.toLowerCase().split(' ').join('-')
+}
