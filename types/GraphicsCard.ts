@@ -55,7 +55,7 @@ export interface IManufacturer {
 
 export interface IVRAM {
   id?: number;
-  gb?: number;
+  name?: number;
   createdAt?: Date;
   updatedAt?: Date;
   publishedAt?: Date;
@@ -71,7 +71,7 @@ export interface IMemoryType {
 
 export interface IConnector {
   id?: number;
-  type?: string;
+  name?: string;
   createdAt?: Date;
   updatedAt?: Date;
   publishedAt?: Date;
@@ -79,7 +79,7 @@ export interface IConnector {
 
 export interface IPowerConnector {
   id?: number;
-  type?: string;
+  name?: string;
   createdAt?: Date;
   updatedAt?: Date;
   publishedAt?: Date;
@@ -87,7 +87,7 @@ export interface IPowerConnector {
 
 export interface IMotherboardInterface {
   id?: number;
-  type?: string;
+  name?: string;
   createdAt?: Date;
   updatedAt?: Date;
   publishedAt?: Date;
@@ -95,7 +95,7 @@ export interface IMotherboardInterface {
 
 export interface BusWidth {
   id?: number;
-  bit?: string;
+  name?: string;
   createdAt?: Date;
   updatedAt?: Date;
   publishedAt?: Date;

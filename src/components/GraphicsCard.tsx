@@ -68,7 +68,7 @@ const GraphicsCard: React.FC<Props> = ({ videoCard }) => {
         />
         <DescriptionItem
           heading="VRAM"
-          text={videoCard?.vram?.gb || ''}
+          text={videoCard?.vram?.name || ''}
           textPostfix=" GB"
         />
         <DescriptionItem
@@ -77,12 +77,12 @@ const GraphicsCard: React.FC<Props> = ({ videoCard }) => {
         />
         <DescriptionItem
           heading="Bus width"
-          text={videoCard?.bus_width?.bit || ''}
+          text={videoCard?.bus_width?.name || ''}
           textPostfix=" bit"
         />
         <DescriptionItem
           heading="Power connector"
-          text={videoCard?.power_connector?.type || ''}
+          text={videoCard?.power_connector?.name || ''}
         />
         <DescriptionItem
           heading="Recommended power supply"
