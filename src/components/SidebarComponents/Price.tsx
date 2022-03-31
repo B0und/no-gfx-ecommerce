@@ -6,17 +6,22 @@ import {
   Slider,
   Typography,
 } from '@mui/material'
+
+import { observer } from 'mobx-react-lite'
 import React, { useContext } from 'react'
 import { useQuery } from 'react-query'
 import { PricesContext } from '../../../pages'
 import getPrices from '../../api/getPrices'
+import useDebounce from '../../hooks/useDebounce'
+import useDidMountEffect from '../../hooks/useDidMountEffect'
+import filtersStore from '../../store/filters.store'
 import { mapOneRangeToAnother } from '../../utils/utils'
 
 function getPriceText(value: number) {
   return `${value} rubles`
 }
 
-const Price = () => {
+const Price = observer(() => {
   const prices = useContext(PricesContext)
   const { data } = useQuery('prices', getPrices, {
     initialData: prices,
@@ -25,6 +30,14 @@ const Price = () => {
   const endP = Math.max(...(data ?? [1000000]))
   const [startPrice, setStartPrice] = React.useState(startP)
   const [endPrice, setEndPrice] = React.useState(endP)
+
+  const debouncedStartPrice = useDebounce(startPrice, 1000)
+  const debouncedEndPrice = useDebounce(endPrice, 1000)
+
+  useDidMountEffect(() => {
+    filtersStore.changeStartPrice(debouncedStartPrice)
+    filtersStore.changeEndPrice(debouncedEndPrice)
+  }, [debouncedStartPrice, debouncedEndPrice])
 
   const [range, setRange] = React.useState([0, 100])
 
@@ -44,7 +57,6 @@ const Price = () => {
     if (!Array.isArray(newValue)) {
       return
     }
-
     setRange(newValue)
 
     if (activeThumb === 0) {
@@ -62,6 +74,7 @@ const Price = () => {
       0,
       100
     )
+
     setRange([newStartRangeValue, range[1]])
   }
 
@@ -123,6 +136,6 @@ const Price = () => {
       />
     </>
   )
-}
+})
 
 export default Price

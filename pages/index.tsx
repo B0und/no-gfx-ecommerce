@@ -37,14 +37,12 @@ const Home: NextPage = observer(
     busWidths,
   }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const queryParams = filtersStore.queryString
-    console.log(`queryParams: ${queryParams}`)
 
     const { isLoading, isError, data, error } = useQuery(
       ['graphics-cards', queryParams],
       () => getGraphicsCards(queryParams),
       { initialData: graphicsCards }
     )
-    console.log(data)
 
     if (isLoading) {
       return <span>Loading...</span>

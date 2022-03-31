@@ -7,9 +7,19 @@ type FilterItem = { name: string; value: boolean }
 
 class Filters {
   filterList = new Map()
+  startPrice: number | null = null
+  endPrice: number | null = null
 
   constructor() {
     makeAutoObservable(this)
+  }
+
+  changeStartPrice(newPrice: number) {
+    this.startPrice = newPrice
+  }
+
+  changeEndPrice(newPrice: number) {
+    this.endPrice = newPrice
   }
 
   addFilter(filterKey: string, item: FilterItem[]) {
@@ -28,6 +38,14 @@ class Filters {
   get queryString() {
     const res: any = { filters: {} }
 
+    res.filters['price'] = {}
+    if (this.startPrice) {
+      res.filters['price']['$gte'] = { 0: this.startPrice }
+    }
+    if (this.endPrice) {
+      res.filters['price']['$lte'] = { 0: this.endPrice }
+    }
+
     this.filterList.forEach((values, categoryKey) => {
       const appliedFilters = []
 
@@ -45,9 +63,15 @@ class Filters {
       }
     })
 
+    console.log(
+      qs.stringify(res, {
+        encodeValuesOnly: true,
+      })
+    )
+
     return qs.stringify(res, {
       encodeValuesOnly: true,
-    }) 
+    })
   }
 }
 
