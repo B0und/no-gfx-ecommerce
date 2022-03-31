@@ -22,6 +22,7 @@ const Sidebar = (props: ISidebarProps) => {
     <Box
       sx={{
         minWidth: '280px',
+        maxWidth: '280px',
         background: '#eaeaea',
 
         p: '16px',

@@ -20,70 +20,79 @@ import getMemoryTypes from '../src/api/getMemoryTypes'
 import getBusWidths from '../src/api/getBusWidths'
 import { Grid } from '@mui/material'
 import SortHeader from '../src/components/SortHeader'
+import filtersStore from '../src/store/filters.store'
+import { observer } from 'mobx-react-lite'
 
 export const PricesContext = createContext([])
 
-const Home: NextPage = ({
-  graphicsCards,
-  prices,
-  developers,
-  manufacturers,
-  videochipsets,
-  vrams,
-  memoryTypes,
-  busWidths,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { isLoading, isError, data, error } = useQuery(
-    'graphics-cards',
-    getGraphicsCards,
-    { initialData: graphicsCards }
-  )
+const Home: NextPage = observer(
+  ({
+    graphicsCards,
+    prices,
+    developers,
+    manufacturers,
+    videochipsets,
+    vrams,
+    memoryTypes,
+    busWidths,
+  }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    const queryParams = filtersStore.queryString
+    console.log(`queryParams: ${queryParams}`)
 
-  if (isLoading) {
-    return <span>Loading...</span>
-  }
+    const { isLoading, isError, data, error } = useQuery(
+      ['graphics-cards', queryParams],
+      () => getGraphicsCards(queryParams),
+      { initialData: graphicsCards }
+    )
+    console.log(data)
 
-  if (isError) {
-    return <span>Error {error}</span>
-  }
+    if (isLoading) {
+      return <span>Loading...</span>
+    }
 
-  return (
-    <Layout>
-      <Box
-        sx={{
-          my: 4,
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
-          alignItems: 'flex-start',
-          gap: '16px',
-        }}
-      >
-        <PricesContext.Provider value={prices}>
-          <Sidebar
-            developers={developers}
-            manufacturers={manufacturers}
-            videochipsets={videochipsets}
-            vrams={vrams}
-            memoryTypes={memoryTypes}
-            busWidths={busWidths}
-          />
-        </PricesContext.Provider>
+    if (isError) {
+      return <span>Error {error}</span>
+    }
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <SortHeader />
-          <Grid container spacing={2}>
-            {data?.data?.map((videoCard: IGraphicsCard) => (
-              <Grid item width="100%" key={videoCard.id}>
-                <GraphicsCard videoCard={videoCard} />
-              </Grid>
-            ))}
-          </Grid>
+    return (
+      <Layout>
+        <Box
+          sx={{
+            my: 4,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+            gap: '16px',
+          }}
+        >
+          <PricesContext.Provider value={prices}>
+            <Sidebar
+              developers={developers}
+              manufacturers={manufacturers}
+              videochipsets={videochipsets}
+              vrams={vrams}
+              memoryTypes={memoryTypes}
+              busWidths={busWidths}
+            />
+          </PricesContext.Provider>
+
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <SortHeader />
+            <Grid container spacing={2}>
+              {data?.data?.map((videoCard: IGraphicsCard) => (
+                <Grid item width="100%" key={videoCard.id}>
+                  <GraphicsCard videoCard={videoCard} />
+                </Grid>
+              ))}
+            </Grid>
+              {data.data.length === 0 && <p>Nothing found</p>}
+          </Box>
         </Box>
-      </Box>
-    </Layout>
-  )
-}
+      </Layout>
+    )
+  }
+)
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const [

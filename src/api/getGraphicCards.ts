@@ -1,8 +1,8 @@
 import { IGraphicsResponse } from '../../types/GraphicsCard'
 import axiosConfig from './axiosConfig'
 
-const getGraphicsCards = async (): Promise<IGraphicsResponse> => {
-  const res = await axiosConfig.get('/products?populate=*')
+const getGraphicsCards = async (params = ''): Promise<IGraphicsResponse> => {
+  const res = await axiosConfig.get(`/products?populate=*&${params}`)
   return res.data
 }
 export default getGraphicsCards

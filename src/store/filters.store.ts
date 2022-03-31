@@ -47,7 +47,7 @@ class Filters {
 
     return qs.stringify(res, {
       encodeValuesOnly: true,
-    })
+    }) 
   }
 }
 

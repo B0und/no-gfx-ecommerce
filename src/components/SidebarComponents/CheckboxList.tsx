@@ -1,5 +1,6 @@
 import { Box, Checkbox, FormControlLabel, FormGroup } from '@mui/material'
-import React, { useState } from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import filtersStore from '../../store/filters.store'
 import { parseCategoryString } from '../../utils/utils'
@@ -11,7 +12,7 @@ interface ICheckboxList {
   postfix?: string
 }
 
-const CheckboxList: React.FC<ICheckboxList> = (props) => {
+const CheckboxList: React.FC<ICheckboxList> = observer((props) => {
   const [show, setShow] = useState(false)
   const [isChecked, setIsChecked] = React.useState<boolean[]>(
     props.initialData.slice().fill(false)
@@ -22,10 +23,9 @@ const CheckboxList: React.FC<ICheckboxList> = (props) => {
     value: false,
   }))
 
-  filtersStore.addFilter(parseCategoryString(props.title), itemState)
-
-  const qString = filtersStore.queryString
-  console.log(qString)
+  useEffect(() => {
+    filtersStore.addFilter(parseCategoryString(props.title), itemState)
+  }, [itemState, props.title])
 
   const { data } = useQuery(
     props.title.toLocaleLowerCase(),
@@ -100,6 +100,6 @@ const CheckboxList: React.FC<ICheckboxList> = (props) => {
       </Box>
     </FormGroup>
   )
-}
+})
 
 export default CheckboxList
