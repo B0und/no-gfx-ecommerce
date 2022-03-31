@@ -33,7 +33,7 @@ class Filters {
 
       for (const filterField of toJS(values)) {
         if (filterField.value == true) {
-          appliedFilters.push(filterField.name.toLowerCase())
+          appliedFilters.push(filterField.name)
         }
       }
 

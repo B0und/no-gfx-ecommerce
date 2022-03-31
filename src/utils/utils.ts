@@ -15,5 +15,5 @@ export function mapOneRangeToAnother(
 }
 
 export function parseCategoryString(text: string) {
-  return text.toLowerCase().split(' ').join('-')
+  return text.toLowerCase().split(' ').join('_')
 }
