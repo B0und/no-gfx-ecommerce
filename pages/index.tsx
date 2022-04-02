@@ -11,7 +11,7 @@ import Layout from '../src/components/Layout'
 import Sidebar from '../src/components/SidebarComponents/Sidebar'
 import { Box } from '@mui/system'
 import getPrices from '../src/api/getPrices'
-import { createContext } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import getDevelopers from '../src/api/getDevelopers'
 import getManufacturers from '../src/api/getManufacturers'
 import getVideoChipsets from '../src/api/getVideoChipsets'
@@ -37,12 +37,17 @@ const Home: NextPage = observer(
     busWidths,
   }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const queryParams = filtersStore.queryString
-
     const { isLoading, isError, data, error } = useQuery(
       ['graphics-cards', queryParams],
       () => getGraphicsCards(queryParams),
       { initialData: graphicsCards }
     )
+
+    const [filteredData, setFilteredData] = useState(data)
+
+    useEffect(() => {
+      setFilteredData(data)
+    }, [data])
 
     if (isLoading) {
       return <span>Loading...</span>
@@ -76,15 +81,15 @@ const Home: NextPage = observer(
           </PricesContext.Provider>
 
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <SortHeader />
+            <SortHeader setFilteredData={setFilteredData} initialData={data} />
             <Grid container spacing={2}>
-              {data?.data?.map((videoCard: IGraphicsCard) => (
+              {filteredData?.data?.map((videoCard: IGraphicsCard) => (
                 <Grid item width="100%" key={videoCard.id}>
                   <GraphicsCard videoCard={videoCard} />
                 </Grid>
               ))}
             </Grid>
-              {data.data.length === 0 && <p>Nothing found</p>}
+            {filteredData.data.length === 0 && <p>Nothing found</p>}
           </Box>
         </Box>
       </Layout>
