@@ -11,7 +11,7 @@ import Layout from '../src/components/Layout'
 import Sidebar from '../src/components/SidebarComponents/Sidebar'
 import { Box } from '@mui/system'
 import getPrices from '../src/api/getPrices'
-import { createContext, useEffect, useState } from 'react'
+import { createContext, memo, useEffect, useState } from 'react'
 import getDevelopers from '../src/api/getDevelopers'
 import getManufacturers from '../src/api/getManufacturers'
 import getVideoChipsets from '../src/api/getVideoChipsets'
@@ -132,4 +132,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-export default Home
+export default memo(Home)

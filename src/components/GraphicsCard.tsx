@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import { IGraphicsCard } from '../../types/GraphicsCard'
 import { Box, Button } from '@mui/material'
+import Link from './Link'
 
 type Props = {
   videoCard: IGraphicsCard
@@ -58,10 +59,16 @@ const GraphicsCard: React.FC<Props> = ({ videoCard }) => {
       />
 
       <CardContent sx={{ flex: 1 }}>
-        <Typography component="h2" variant="h5" sx={{ pb: '16px' }}>
-          {videoCard.displayName}
-        </Typography>
-
+        <Link
+          href={{
+            pathname: `/graphics-cards/${videoCard.id}`,
+            query: { name: 'test' },
+          }}
+        >
+          <Typography component="h2" variant="h5" sx={{ pb: '16px' }}>
+            {videoCard.displayName}
+          </Typography>
+        </Link>
         <DescriptionItem
           heading="Videochipset"
           text={videoCard.video_chipset.name || ''}
@@ -90,6 +97,7 @@ const GraphicsCard: React.FC<Props> = ({ videoCard }) => {
           textPostfix=" W"
         />
       </CardContent>
+
       <Box
         sx={{
           display: 'flex',

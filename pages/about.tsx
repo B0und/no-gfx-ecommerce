@@ -1,16 +1,13 @@
 import * as React from 'react'
 import type { NextPage } from 'next'
-import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import Link from 'next/link'
-import { Link as MUILink } from '@mui/material'
-import ProTip from '../src/components/ProTip'
-import Copyright from '../src/components/Copyright'
+import Layout from '../src/components/Layout'
+import Link from '../src/components/Link'
 
 const About: NextPage = () => {
   return (
-    <Container maxWidth="lg">
+    <Layout>
       <Box
         sx={{
           my: 4,
@@ -24,15 +21,13 @@ const About: NextPage = () => {
           MUI v5 + Next.js with TypeScript example
         </Typography>
         <Box maxWidth="sm">
-          <Link href="/" passHref>
-            <MUILink color="secondary">Go to the home page</MUILink>
+          <Link color="secondary" href="/">
+            Go to the home page
           </Link>
         </Box>
-        <ProTip />
-        <Copyright />
       </Box>
-    </Container>
+    </Layout>
   )
 }
 
-export default About
+export default React.memo(About)

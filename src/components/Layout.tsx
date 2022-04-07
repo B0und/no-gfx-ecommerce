@@ -7,7 +7,7 @@ const Layout: React.FC = ({ children }) => {
   return (
     <Container maxWidth="lg">
       <PrimarySearchAppBar />
-      <>{children}</>
+      <div>{children}</div>
       <Footer />
     </Container>
   )

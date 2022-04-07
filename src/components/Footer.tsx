@@ -1,8 +1,9 @@
-import { Box, Typography } from '@mui/material'
-import Link from 'next/link'
-import { Link as MUILink } from '@mui/material'
+import { Box } from '@mui/material'
+// import Link from 'next/link'
+// import { Link as MUILink } from '@mui/material'
 import ProTip from './ProTip'
 import Copyright from './Copyright'
+import Link from './Link'
 
 const Footer = () => {
   return (
@@ -15,11 +16,8 @@ const Footer = () => {
         alignItems: 'center',
       }}
     >
-      <Typography variant="h4" component="h1" gutterBottom>
-        MUI v5 + Next.js with TypeScript example
-      </Typography>
-      <Link href="/about" passHref>
-        <MUILink color="secondary">Go to the about page</MUILink>
+      <Link color="secondary" href="/about">
+        Go to the about page
       </Link>
 
       <ProTip />

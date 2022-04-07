@@ -42,6 +42,7 @@ class Filters {
     if (this.startPrice) {
       res.filters['price']['$gte'] = { 0: this.startPrice }
     }
+
     if (this.endPrice) {
       res.filters['price']['$lte'] = { 0: this.endPrice }
     }
@@ -62,12 +63,6 @@ class Filters {
         res.filters[parsedKey]['name']['$in'] = appliedFilters
       }
     })
-
-    console.log(
-      qs.stringify(res, {
-        encodeValuesOnly: true,
-      })
-    )
 
     return qs.stringify(res, {
       encodeValuesOnly: true,
