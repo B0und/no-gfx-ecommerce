@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { ReactNode, useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { CarouselThumb } from './CarouselThumb'
@@ -48,7 +49,7 @@ const Carousel = (props: PropType) => {
   }, [embla, onSelect])
 
   return (
-    <>
+    <div className={styles.embla__wrapper}>
       <div className={styles.embla}>
         <div className={styles.embla__viewport} ref={mainViewportRef}>
           <div className={styles.embla__container}>
@@ -85,7 +86,7 @@ const Carousel = (props: PropType) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -1,3 +1,9 @@
+.embla__wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 500px;
+}
+
 .embla {
   position: relative;
   background-color: #fff;
