@@ -16,7 +16,7 @@ interface IDescriptionItem {
   textPostfix?: string
 }
 
-const DescriptionItem: React.FC<IDescriptionItem> = ({
+export const DescriptionItem: React.FC<IDescriptionItem> = ({
   heading,
   text,
   textPostfix,

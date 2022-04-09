@@ -1,7 +1,7 @@
 import { Container } from '@mui/material'
 import React from 'react'
 import Footer from './Footer'
-import PrimarySearchAppBar from './PrimarySearchAppBar'
+import PrimarySearchAppBar from './Navbar'
 
 const Layout: React.FC = ({ children }) => {
   return (
