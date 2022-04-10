@@ -4,6 +4,7 @@ import { useQuery } from 'react-query'
 import getGraphicCard from '../../src/api/getGraphicCard'
 import Carousel from '../../src/components/Carousel'
 import Layout from '../../src/components/Layout'
+import Link from '../../src/components/Link'
 
 const SLIDE_COUNT = 3
 const slides = Array.from(Array(SLIDE_COUNT).keys())
@@ -24,7 +25,7 @@ const DetailedGraphicsCard = ({ id }: { id: number }) => {
 
   return (
     <Layout>
-      <Box component="section" sx={{ display: 'flex', gap: '32px' }}>
+      <Box component="section" sx={{ display: 'flex', gap: '100px' }}>
         <Carousel slides={slides} />
 
         <Box
@@ -35,6 +36,18 @@ const DetailedGraphicsCard = ({ id }: { id: number }) => {
             gap: '16px',
           }}
         >
+          <Link
+            variant="subtitle1"
+            color="secondary"
+            href="/"
+            sx={{
+              color: '#757577',
+              textDecoration: 'none',
+            }}
+          >
+            Graphics Cards /
+          </Link>
+
           <Typography
             component="h2"
             variant="h4"
@@ -43,7 +56,9 @@ const DetailedGraphicsCard = ({ id }: { id: number }) => {
             {data?.data?.displayName}
           </Typography>
 
-          <Typography variant="h4">{data?.data?.price} ₽</Typography>
+          <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+            {data?.data?.price} <span >₽</span>
+          </Typography>
           <Button variant="contained">Add to cart</Button>
         </Box>
       </Box>
