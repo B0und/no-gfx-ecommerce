@@ -1,15 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import { ReactNode, useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { CarouselThumb } from './CarouselThumb'
 import styles from './embla.module.css'
 import { NextButton, PrevButton } from './CarouselButtons'
 
 type PropType = {
-  slides: ReactNode[]
+  images: string[]
 }
 const Carousel = (props: PropType) => {
-  const { slides } = props
+  const { images } = props
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
@@ -53,13 +53,13 @@ const Carousel = (props: PropType) => {
       <div className={styles.embla}>
         <div className={styles.embla__viewport} ref={mainViewportRef}>
           <div className={styles.embla__container}>
-            {slides.map((_, index) => (
+            {images.map((image, index) => (
               <div className={styles.embla__slide} key={index}>
                 <div className={styles.embla__slide__inner}>
                   <img
                     className={styles.embla__slide__img}
-                    src="/1_gigabyte_amd_radeon_rx_6600.jpg"
-                    alt="A cool cat."
+                    src={'/' + image}
+                    alt="graphics card"
                   />
                 </div>
               </div>
@@ -75,11 +75,11 @@ const Carousel = (props: PropType) => {
           <div
             className={`${styles.embla__container} ${styles['embla__container--thumb']}`}
           >
-            {slides.map((slide, index) => (
+            {images.map((image, index) => (
               <CarouselThumb
-                onClick={() => onThumbClick(slide)}
-                selected={slide === selectedIndex}
-                imgSrc="/1_gigabyte_amd_radeon_rx_6600.jpg"
+                onClick={() => onThumbClick(index)}
+                selected={index === selectedIndex}
+                imgSrc={'/' + image}
                 key={index}
               />
             ))}

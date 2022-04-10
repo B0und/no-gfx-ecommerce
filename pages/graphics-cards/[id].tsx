@@ -6,14 +6,21 @@ import Carousel from '../../src/components/Carousel'
 import Layout from '../../src/components/Layout'
 import Link from '../../src/components/Link'
 
-const SLIDE_COUNT = 3
-const slides = Array.from(Array(SLIDE_COUNT).keys())
-
 const DetailedGraphicsCard = ({ id }: { id: number }) => {
   const { isLoading, isError, data, error } = useQuery(
     ['graphics-cards', id],
     () => getGraphicCard(id)
   )
+
+  const images = []
+  for (let i = 1; i < 7; i++) {
+    const manufacturer = data?.data?.manufacturer.name?.toLowerCase()
+    const developer = data?.data?.developer.name?.toLowerCase()
+    let chipset = data?.data?.video_chipset.name?.toLowerCase()
+    chipset = chipset?.split(' ').join('_')
+    images.push(`${i}_${manufacturer}_${developer}_${chipset}.jpg`)
+  }
+  console.log(images)
 
   if (isLoading) {
     return <span>Loading...</span>
@@ -26,7 +33,7 @@ const DetailedGraphicsCard = ({ id }: { id: number }) => {
   return (
     <Layout>
       <Box component="section" sx={{ display: 'flex', gap: '100px' }}>
-        <Carousel slides={slides} />
+        <Carousel images={images} />
 
         <Box
           sx={{
@@ -45,7 +52,7 @@ const DetailedGraphicsCard = ({ id }: { id: number }) => {
               textDecoration: 'none',
             }}
           >
-            Graphics Cards /
+            . / Graphics Cards /
           </Link>
 
           <Typography
@@ -56,9 +63,14 @@ const DetailedGraphicsCard = ({ id }: { id: number }) => {
             {data?.data?.displayName}
           </Typography>
 
-          <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-            {data?.data?.price} <span >₽</span>
-          </Typography>
+          <Box sx={{ display: 'flex', gap: '8px' }}>
+            <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+              {data?.data?.price}
+            </Typography>
+            <Typography variant="h4" sx={{ color: '#a0a0a1' }}>
+              ₽
+            </Typography>
+          </Box>
           <Button variant="contained">Add to cart</Button>
         </Box>
       </Box>

@@ -7,7 +7,7 @@ interface ThumbProps {
   imgSrc?: string
 }
 
-export const CarouselThumb = ({ selected, onClick }: ThumbProps) => (
+export const CarouselThumb = ({ selected, onClick, imgSrc }: ThumbProps) => (
   <div
     className={`${styles.embla__slide} ${styles['embla__slide--thumb']} ${
       selected ? 'is-selected' : ''
@@ -20,7 +20,7 @@ export const CarouselThumb = ({ selected, onClick }: ThumbProps) => (
     >
       <img
         className={styles.embla__slide__thumbnail}
-        src="/1_gigabyte_amd_radeon_rx_6600.jpg"
+        src={imgSrc}
         alt="graphics card"
       />
     </button>
