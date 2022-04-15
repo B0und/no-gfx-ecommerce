@@ -20,7 +20,6 @@ const DetailedGraphicsCard = ({ id }: { id: number }) => {
     chipset = chipset?.split(' ').join('_')
     images.push(`${i}_${manufacturer}_${developer}_${chipset}.jpg`)
   }
-  console.log(images)
 
   if (isLoading) {
     return <span>Loading...</span>
@@ -188,7 +187,6 @@ const DetailedGraphicsCard = ({ id }: { id: number }) => {
   )
 }
 export const getServerSideProps = (context: { params: { id: number } }) => {
-  // console.log(context)
   return {
     props: {
       id: context.params.id,
