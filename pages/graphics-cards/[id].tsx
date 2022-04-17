@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material'
+import { Button, CircularProgress, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { useQuery } from 'react-query'
 import getGraphicCard from '../../src/api/getGraphicCard'
@@ -22,7 +22,7 @@ const DetailedGraphicsCard = ({ id }: { id: number }) => {
   }
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <CircularProgress />
   }
 
   if (isError) {

@@ -18,7 +18,7 @@ import getVideoChipsets from '../src/api/getVideoChipsets'
 import getVRAMs from '../src/api/getVRAMs'
 import getMemoryTypes from '../src/api/getMemoryTypes'
 import getBusWidths from '../src/api/getBusWidths'
-import { Grid } from '@mui/material'
+import { CircularProgress, Grid } from '@mui/material'
 import SortHeader from '../src/components/SortHeader'
 import filtersStore from '../src/store/filters.store'
 import { observer } from 'mobx-react-lite'
@@ -50,7 +50,7 @@ const Home: NextPage = observer(
     }, [data])
 
     if (isLoading) {
-      return <span>Loading...</span>
+      return <CircularProgress />
     }
 
     if (isError) {
