@@ -1,4 +1,3 @@
-import React from 'react'
 import MenuItem from '@mui/material/MenuItem'
 import Menu from '@mui/material/Menu'
 
@@ -16,26 +15,24 @@ const DesktopMenu = ({
   handleMenuClose,
 }: IDesktopMenu) => {
   return (
-    <>
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        id={menuId}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={isMenuOpen}
-        onClose={handleMenuClose}
-      >
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      </Menu>
-    </>
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
   )
 }
 

@@ -1,11 +1,12 @@
 import { Badge, Box, IconButton } from '@mui/material'
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import LoginIcon from '@mui/icons-material/Login'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import CompareIcon from '@mui/icons-material/AlignVerticalTop'
 import FavouriteIcon from '@mui/icons-material/Favorite'
 import AccountCircle from '@mui/icons-material/AccountCircle'
+import { LoginModal } from '../LoginModal'
 
 interface INavPanel {
   menuId: string
@@ -20,6 +21,12 @@ const NavPanel: React.FC<INavPanel> = ({
   handleProfileMenuOpen,
   mobileMenuId,
 }) => {
+  const [showModal, setShowModal] = useState(false)
+
+  const toggleModal = useCallback(() => {
+    setShowModal((prev) => !prev)
+  }, [])
+
   return (
     <div>
       <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: '8px' }}>
@@ -49,6 +56,7 @@ const NavPanel: React.FC<INavPanel> = ({
           aria-controls={menuId}
           aria-haspopup="true"
           color="inherit"
+          onClick={toggleModal}
         >
           <LoginIcon />
         </IconButton>
@@ -76,6 +84,9 @@ const NavPanel: React.FC<INavPanel> = ({
           <MoreIcon />
         </IconButton>
       </Box>
+      {showModal ? (
+        <LoginModal showModal={showModal} setShowModal={setShowModal} />
+      ) : null}
     </div>
   )
 }
