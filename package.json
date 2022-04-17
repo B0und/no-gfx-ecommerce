@@ -9,21 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/cache": "11.7.1",
-    "@emotion/react": "11.8.2",
-    "@emotion/server": "11.4.0",
-    "@emotion/styled": "11.8.1",
-    "@mui/icons-material": "5.5.1",
-    "@mui/material": "5.5.1",
+    "@emotion/cache": "^11.7.1",
+    "@emotion/react": "^11.8.2",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.5.1",
+    "@mui/material": "^5.5.1",
     "axios": "0.26.1",
     "embla-carousel-react": "^6.2.0",
     "mobx": "^6.5.0",
     "mobx-react-lite": "^3.3.0",
     "next": "^12.1.0",
     "qs": "^6.10.3",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-query": "3.34.16"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-query": "^3.34.16"
   },
   "devDependencies": {
     "@cld-apis/types": "0.1.6",
@@ -37,6 +37,6 @@
     "husky": "7.0.4",
     "lint-staged": "12.3.5",
     "prettier": "2.5.1",
-    "typescript": "4.6.2"
+    "typescript": "^4.6.2"
   }
 }
