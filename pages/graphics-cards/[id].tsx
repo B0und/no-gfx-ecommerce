@@ -10,11 +10,19 @@ import { IGraphicResponse } from '../../types/GraphicsCard'
 
 const DetailedGraphicsCard = ({
   data,
-  images,
 }: {
   data: IGraphicResponse
   images: Array<string>
 }) => {
+  const images = []
+  for (let i = 1; i < 7; i++) {
+    const manufacturer = data?.data?.manufacturer.name?.toLowerCase()
+    const developer = data?.data?.developer.name?.toLowerCase()
+    let chipset = data?.data?.video_chipset.name?.toLowerCase()
+    chipset = chipset?.split(' ').join('_')
+    images.push(`${i}_${manufacturer}_${developer}_${chipset}.jpg`)
+  }
+
   return (
     <Layout>
       <Box component="section" sx={{ display: 'flex', gap: '100px' }}>
@@ -179,19 +187,9 @@ export const getStaticProps = async (context: { params: { id: string } }) => {
 
   // console.log(data)
 
-  const images = []
-  for (let i = 1; i < 7; i++) {
-    const manufacturer = data?.data?.manufacturer.name?.toLowerCase()
-    const developer = data?.data?.developer.name?.toLowerCase()
-    let chipset = data?.data?.video_chipset.name?.toLowerCase()
-    chipset = chipset?.split(' ').join('_')
-    images.push(`${i}_${manufacturer}_${developer}_${chipset}.jpg`)
-  }
-
   return {
     props: {
       data,
-      images,
     },
   }
 }
@@ -200,7 +198,7 @@ export const getStaticPaths = async () => {
   const data = await getGraphicsCards()
 
   const paths = data?.data?.map((gfx) => ({
-    params: { id: gfx.id?.toString() }, // keep in mind if post.id is a number you need to stringify post.id
+    params: { id: gfx.id?.toString() },
   }))
 
   return {
