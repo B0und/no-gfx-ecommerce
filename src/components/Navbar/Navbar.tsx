@@ -95,7 +95,7 @@ export default function Navbar() {
 
   return (
     <ElevationScroll>
-      <AppBar position="sticky" sx={{ bgcolor: 'white', color: 'black' }}>
+      <AppBar position="sticky" sx={{ bgcolor: 'white', color: '#000000' }}>
         <Box sx={{ flexGrow: 1 }}>
           <Toolbar disableGutters>
             <IconButton
@@ -112,7 +112,7 @@ export default function Navbar() {
               variant="h5"
               color="secondary"
               href="/"
-              sx={{ color: 'black', textDecoration: 'none' }}
+              sx={{ color: '#000000', textDecoration: 'none' }}
             >
               noGFX
             </Link>

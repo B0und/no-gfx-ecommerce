@@ -60,9 +60,13 @@ const Price = observer(() => {
     setRange(newValue)
 
     if (activeThumb === 0) {
-      setStartPrice(mapOneRangeToAnother(newValue[0], 0, 100, startP, endP))
+      if (newValue[0]) {
+        setStartPrice(mapOneRangeToAnother(newValue[0], 0, 100, startP, endP))
+      }
     } else {
-      setEndPrice(mapOneRangeToAnother(newValue[1], 0, 100, startP, endP))
+      if (newValue[1]) {
+        setEndPrice(mapOneRangeToAnother(newValue[1], 0, 100, startP, endP))
+      }
     }
   }
 
@@ -74,8 +78,9 @@ const Price = observer(() => {
       0,
       100
     )
-
-    setRange([newStartRangeValue, range[1]])
+    if (range[1]) {
+      setRange([newStartRangeValue, range[1]])
+    }
   }
 
   const handleEndPriceBlur = () => {
@@ -86,7 +91,9 @@ const Price = observer(() => {
       0,
       100
     )
-    setRange([range[0], newEndRangeValue])
+    if (range[0]) {
+      setRange([range[0], newEndRangeValue])
+    }
   }
 
   return (
