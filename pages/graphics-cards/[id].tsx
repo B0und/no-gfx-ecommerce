@@ -1,34 +1,20 @@
-import { Button, CircularProgress, Typography } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import { useQuery } from 'react-query'
+
 import getGraphicCard from '../../src/api/getGraphicCard'
+import getGraphicsCards from '../../src/api/getGraphicCards'
 import Carousel from '../../src/components/Carousel'
 import Layout from '../../src/components/Layout'
 import Link from '../../src/components/Link'
+import { IGraphicResponse } from '../../types/GraphicsCard'
 
-const DetailedGraphicsCard = ({ id }: { id: number }) => {
-  const { isLoading, isError, data, error } = useQuery(
-    ['graphics-cards', id],
-    () => getGraphicCard(id)
-  )
-
-  const images = []
-  for (let i = 1; i < 7; i++) {
-    const manufacturer = data?.data?.manufacturer.name?.toLowerCase()
-    const developer = data?.data?.developer.name?.toLowerCase()
-    let chipset = data?.data?.video_chipset.name?.toLowerCase()
-    chipset = chipset?.split(' ').join('_')
-    images.push(`${i}_${manufacturer}_${developer}_${chipset}.jpg`)
-  }
-
-  if (isLoading) {
-    return <CircularProgress />
-  }
-
-  if (isError) {
-    return <span>Error {error}</span>
-  }
-
+const DetailedGraphicsCard = ({
+  data,
+  images,
+}: {
+  data: IGraphicResponse
+  images: Array<string>
+}) => {
   return (
     <Layout>
       <Box component="section" sx={{ display: 'flex', gap: '100px' }}>
@@ -186,11 +172,40 @@ const DetailedGraphicsCard = ({ id }: { id: number }) => {
     </Layout>
   )
 }
-export const getServerSideProps = (context: { params: { id: number } }) => {
+
+export const getStaticProps = async (context: { params: { id: string } }) => {
+  const id = context.params.id
+  const data = await getGraphicCard(id)
+
+  // console.log(data)
+
+  const images = []
+  for (let i = 1; i < 7; i++) {
+    const manufacturer = data?.data?.manufacturer.name?.toLowerCase()
+    const developer = data?.data?.developer.name?.toLowerCase()
+    let chipset = data?.data?.video_chipset.name?.toLowerCase()
+    chipset = chipset?.split(' ').join('_')
+    images.push(`${i}_${manufacturer}_${developer}_${chipset}.jpg`)
+  }
+
   return {
     props: {
-      id: context.params.id,
+      data,
+      images,
     },
+  }
+}
+
+export const getStaticPaths = async () => {
+  const data = await getGraphicsCards()
+
+  const paths = data?.data?.map((gfx) => ({
+    params: { id: gfx.id?.toString() }, // keep in mind if post.id is a number you need to stringify post.id
+  }))
+
+  return {
+    paths: paths,
+    fallback: true, // true, false or 'blocking'
   }
 }
 export default DetailedGraphicsCard

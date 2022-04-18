@@ -1,8 +1,4 @@
-import type {
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-  NextPage,
-} from 'next'
+import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import { useQuery } from 'react-query'
 import getGraphicsCards from '../src/api/getGraphicCards'
 import GraphicsCard from '../src/components/GraphicsCard'
@@ -35,7 +31,7 @@ const Home: NextPage = observer(
     vrams,
     memoryTypes,
     busWidths,
-  }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  }: InferGetStaticPropsType<typeof getStaticProps>) => {
     const queryParams = filtersStore.queryString
     const { isLoading, isError, data, error } = useQuery(
       ['graphics-cards', queryParams],
@@ -97,7 +93,7 @@ const Home: NextPage = observer(
   }
 )
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const [
     graphicsCards,
     prices,

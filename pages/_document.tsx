@@ -15,19 +15,19 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
           {/* <!-- old icon format --> */}
-          <link rel="icon" sizes="any" href="favicon.ico" />
+          <link rel="icon" sizes="any" href="/favicon.ico" />
           {/* <!-- svg icon --> */}
-          <link rel="icon" type="image/svg+xml" href="icon.svg" />
+          <link rel="icon" type="image/svg+xml" href="/icon.svg" />
           {/* <!-- apple icon --> */}
           <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href="https://no-gfx-ecommerce.vercel.app/apple-touch-icon.png"
+            href="/apple-touch-icon.png"
           />
 
           <link
             rel="manifest"
-            href="https://no-gfx-ecommerce.vercel.app/site.webmanifest"
+            href="/site.webmanifest"
           />
 
           {/* Inject MUI styles first to match with the prepend: true configuration. */}

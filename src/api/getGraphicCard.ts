@@ -2,7 +2,7 @@ import { IGraphicResponse } from '../../types/GraphicsCard'
 import axiosConfig from './axiosConfig'
 
 const getGraphicCard = async (
-  id: number,
+  id: number | string,
   params = ''
 ): Promise<IGraphicResponse> => {
   const res = await axiosConfig.get(`/products/${id}/?populate=*&${params}`)
